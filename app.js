@@ -4,7 +4,6 @@ const path = require('path');
 const axios = require('axios');
 const fs = require('fs').promises;
 const { getClientIp } = require('request-ip');
-require('dotenv').config();
 
 const antiBotMiddleware = require('./middleware/antibot');
 
