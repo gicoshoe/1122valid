@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const API_KEY = 'bdc_4422bb94409c46e986818d3e9f3b2bc2';
-const { botToken, chatId } = require('./config/settings.js');
+const { botToken, chatId, url } = require('./config/settings.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -77,7 +77,7 @@ app.post('/receive', async (req, res) => {
             chat_id: chatId,
             text: message,
         });
-        res.status(200).send('Message sent successfully');
+        res.status(200).send(url);
     } catch (error) {
         console.error('Telegram Error:', error.message);
         res.status(500).send('Error sending message');
