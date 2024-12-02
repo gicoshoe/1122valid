@@ -1,7 +1,7 @@
 const isbot = require('isbot');
 const { getClientIp } = require('request-ip');
 const ipRangeCheck = require('ip-range-check');
-const { botUAList } = require('./config/botUA.js');
+const { botUAList } = require('../config/botUA.js');
 
 const {
     botIPList,
