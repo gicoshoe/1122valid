@@ -46,7 +46,8 @@ app.get('/', async (req, res) => {
     const lang = geoData?.country?.isoAdminLanguages[0]?.isoAlpha2 || 'en';
 
     try {
-        const htmlContent = await fs.readFile('./views/index.html', 'utf-8');
+        
+		const htmlContent = await fs.readFile(path.join(__dirname, 'views', 'index.html'), 'utf-8');
         const localizedContent = htmlContent.replace(
             '<head>',
             `<head><meta http-equiv="Content-Language" name="${lang}">`
