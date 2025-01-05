@@ -54,7 +54,7 @@ app.get('/', async (req, res) => {
         res.send(localizedContent);
     } catch (error) {
         console.error('Error Reading HTML File:', error.message);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send('Error Reading HTML File:', error.message);
     }
 });
 
